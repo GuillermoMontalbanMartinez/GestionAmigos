@@ -51,15 +51,15 @@ struct VistaListaAmigos: View {
                             Text("Mostrar solo los favoritos")
                         }
                         
-                        ForEach(0..<amigoVM.datos.count) { amigo in
-                            if !soloFavoritos || amigoVM.datos[amigo].favorito {
+                        ForEach(amigoVM.datos) { amigo in
+                            if !soloFavoritos || amigo.favorito {
                                 if query.isEmpty {
-                                    NavigationLink(destination: VistaDetalle(index: amigo, amigo: amigoVM.datos[amigo])) {
-                                        VistaFilaAmigos(amigoCurrent: amigoVM.datos[amigo])}
+                                    NavigationLink(destination: VistaDetalle(amigo: amigo)) {
+                                        VistaFilaAmigos(amigoCurrent: amigo)}
                                 } else {
-                                    if amigoVM.datos[amigo].nombre.lowercased().contains(query.lowercased()) {
-                                        NavigationLink(destination: VistaDetalle(index: amigo, amigo: amigoVM.datos[amigo])) {
-                                                VistaFilaAmigos(amigoCurrent: amigoVM.datos[amigo])}
+                                    if amigo.nombre.lowercased().contains(query.lowercased()) {
+                                        NavigationLink(destination: VistaDetalle(amigo: amigo)) {
+                                                VistaFilaAmigos(amigoCurrent: amigo)}
                                     }
                                 }
                             }

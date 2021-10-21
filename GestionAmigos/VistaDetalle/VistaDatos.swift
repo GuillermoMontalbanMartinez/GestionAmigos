@@ -9,7 +9,7 @@ import SwiftUI
 
 struct VistaDatos: View {
     @EnvironmentObject private var amigoVM: AmigoViewModel
-    var index : Int
+    // var index : Int
     @State private var amigoIndex: Int = -1
     @State var aboutMe:String = ""
     @State private var favorito = false
@@ -19,25 +19,25 @@ struct VistaDatos: View {
     var body: some View {
         VStack {
             HStack {
-                Text(amigoVM.datos[index].nombre)
+                Text(amigo.nombre)
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                     .foregroundColor(Color.black)
                 Button {
-                    amigoVM.datos[index].favorito.toggle()
+                    amigoVM.datos[amigoIndex].favorito.toggle()
                 } label: {
-                    Image(systemName: amigoVM.datos[index].favorito ? "star.fill" : "star")
-                        .foregroundColor(amigoVM.datos[index].favorito ? .yellow : .gray)
+                    Image(systemName: amigo.favorito ? "star.fill" : "star")
+                        .foregroundColor(amigo.favorito ? .yellow : .gray)
                         
                 }
             }
         
-        Label(amigoVM.datos[index].telefono, systemImage:"iphone")
+        Label(amigo.telefono, systemImage:"iphone")
                 .font(.body)
-        Link(destination: URL(string: amigoVM.datos[index].email)!, label: {
+        Link(destination: URL(string: amigo.email)!, label: {
                 Image(systemName: "livephoto")
                     .frame(width: 40, height: 40, alignment: .center)
                     .foregroundColor(Color.white)
-                Text(amigoVM.datos[index].email)
+                Text(amigo.email)
         }).foregroundColor(.white)
         Divider()
         HStack {
@@ -45,7 +45,7 @@ struct VistaDatos: View {
                 .font(.headline)
                 .background(Color(red: 0.0, green: 188.0 / 255.0, blue: 1.0))
                 .foregroundColor(Color.white)
-            Text(amigoVM.datos[index].about)
+            Text(amigo.about)
                 .foregroundColor(.white)
                 .font(.headline)
                 .background(Color(red: 0.0, green: 188.0 / 255.0, blue: 1.0))
@@ -72,7 +72,7 @@ struct VistaDatos: View {
         }
         TextEditor(text: $aboutMe).onAppear(perform: {
             UITextView.appearance().backgroundColor = .clear
-                aboutMe = amigoVM.datos[index].about
+                aboutMe = amigo.about
                     
             }).frame(width: 350, height: 200)
             .overlay(Rectangle().stroke(Color.white, lineWidth: 2))
@@ -91,14 +91,14 @@ struct VistaDatos: View {
                     aboutMe.removeLast()
                 }
                 // amigoVM.arrAmigos[index].about = value
-            }).onDisappear(perform: {amigoVM.datos[index].about = aboutMe})
+            }).onDisappear(perform: {amigoVM.datos[amigoIndex].about = aboutMe})
             .ignoresSafeArea()
         }.background(Color(red: 0.0, green: 188.0 / 255.0, blue: 1.0))
             .onAppear {
                 // Inicializo las variables de estado
                 UITextView.appearance().backgroundColor = .clear
-                aboutMe = amigo.about
-                favorito = amigo.favorito
+                aboutMe = amigoVM.datos[amigoIndex].about
+                favorito = amigoVM.datos[amigoIndex].favorito
                 amigoIndex = amigoVM.datos.firstIndex(where: {$0.id == amigo.id})!
             } .onDisappear {
                 // Actualizo la estructura de datos principal para registrar los cambios
