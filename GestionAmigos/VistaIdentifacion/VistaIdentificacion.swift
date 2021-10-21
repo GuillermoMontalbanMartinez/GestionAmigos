@@ -43,6 +43,8 @@ struct VistaIdentificacion: View {
             }
             .onAppear {
                 currentUserName = userName ?? ""
+            }.onDisappear {
+                userName = currentUserName
             }
             Spacer()
             Spacer()

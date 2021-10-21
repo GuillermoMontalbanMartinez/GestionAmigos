@@ -50,7 +50,7 @@ struct VistaFila_Previews: PreviewProvider {
         
  */
         List {
-            ForEach(AmigoViewModel().arrAmigos) {
+            ForEach(AmigoViewModel().datos) {
                 VistaFilaAmigos(amigoCurrent: $0)
             }
         }

@@ -10,16 +10,18 @@ import SwiftUI
 struct VistaDetalle: View {
     @EnvironmentObject private var amigoVM: AmigoViewModel
     var index: Int
+    var amigo: Amigo
     
     var body: some View {
         ScrollView {
-            VistaMapa(latitud: amigoVM.arrAmigos[index].latitud, longitud: amigoVM.arrAmigos[index].longitud).frame(width: 400, height: 250, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).ignoresSafeArea()
-            VistaImagen(imagenId: amigoVM.arrAmigos[index].imagenID)
+            VistaMapa(latitud: amigoVM.datos[index].latitud, longitud: amigoVM.datos[index].longitud).frame(width: 400, height: 250, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/).ignoresSafeArea()
+            VistaImagen(imagenId: amigoVM.datos[index].imagenID)
                 .offset(x: 40,y: 10)
                 .padding(-110)
-            VistaDatos(index: index, aboutMe: amigoVM.arrAmigos[index].about).padding(50)
+            // VistaDatos(index: index, aboutMe: amigoVM.datos[index].about).padding(50)
+            VistaDatos(index: index, aboutMe: amigoVM.datos[index].about, amigo: amigoVM.datos[index]).padding(50)
         }
-        .navigationTitle(amigoVM.arrAmigos[index].nombre)
+        .navigationTitle(amigoVM.datos[index].nombre)
         .background(Color(red: 0.0, green: 188.0 / 255.0, blue: 1.0))
         .ignoresSafeArea()
         .navigationBarTitleDisplayMode(.inline)
