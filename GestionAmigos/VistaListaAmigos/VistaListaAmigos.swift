@@ -66,7 +66,7 @@ struct VistaListaAmigos: View {
                             
                         }.onDelete {indexSet in
                             amigoVM.datos.remove(atOffsets: indexSet)
-                        }
+                        }.onMove(perform: move)
                     }.navigationTitle("Amigos")
                         .navigationBarItems(leading: Button() {
                             enEdicion.toggle()
@@ -88,7 +88,11 @@ struct VistaListaAmigos: View {
                 }
                 
             }
+        
     }
+    func move(from source: IndexSet, to destination: Int) {
+        amigoVM.datos.move(fromOffsets: source, toOffset: destination)
+        }
 }
 
 /*

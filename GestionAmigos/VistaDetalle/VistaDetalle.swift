@@ -31,7 +31,7 @@ struct VistaDetalle: View {
 /*
 struct VistaDetalle_Previews: PreviewProvider {
     static var previews: some View {
-        VistaDetalle().environmentObject(amigoVM())
+        VistaDetalle().environmentObject(amigo)
             
     }
 }
